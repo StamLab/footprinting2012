@@ -30,9 +30,9 @@ detect-cache
 The footprint occupancy score (FOS) of a candidate footprint is defined as:
 FOS = (C+1)/L + (C+1)/R, where C is the average number of tags over the central/core region of a potential footprint, while L (R) is the average tag level found in the left (right) flanking region.
 
---flankmin/--flankmax set the minimum/maximum number of bases over which to find the maximum mean value of a L or R flanking region.
+--flankmin/--flankmax set the min/max number of flanking bases over which to find the maximum mean value for L or R.
 
---centermin/--centermax set the minimum/maximum size (# bp) over which to find the minimum mean value of C.
+--centermin/--centermax set the min/max number of bases over which to find the minimum mean value for C.
 
 --maxthold should be ignored so that the program uses the default value of 10
 
@@ -41,7 +41,7 @@ Input
 =====
 This program accepts a file full of integers that represent the number of sequencing tags at each base over the region of interest, including zeroes where no tags are found at a particular base.
 
-Regions of interest can be easily broken up into subsequences.  Breaking up your data by chromosome may be the most natural method to run things in parallel.
+Regions of interest can be broken up into subsequences by file.  Breaking up your data by chromosome is likely the most natural method before running things in parallel.
 
 
 Results
@@ -56,6 +56,8 @@ The output of this program consists of unthresholded candidate footprints.  The 
 6. The mean of the left-flanking region (L)
 7. The mean of the core region (C)
 8. The mean of the right-flanking region (R)
+
+All candidate footprints are disjoint and they do not abutt.  Each has been optimized over the input parameter settings before further thresholding and the removal of footprints with unmapped bases in the core region.
 
 Note that the program does not know about chromosomes.  Further, it reads in and interprets the first integer as belonging to absolute position 0.  So, if you feed it something that does not start at base 0, you need to adjust the output using the input base offset.
 

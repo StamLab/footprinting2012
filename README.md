@@ -61,7 +61,7 @@ Note that the program does not know about chromosomes.  Further, it reads in and
 
 Even if you paste on chromosome information to the beginning of the output, be careful as the output is not in [sorted BED order].
 
-Typically, one would threshold the potential footprints based upon some metric that utilizes the FOS, paste on appropriate chromosome information as the first field, rearrange columns to convert the output to a BED-like format, and then sort to obtain the final result.
+Typically, one would threshold the potential footprints based upon some metric that utilizes the FOS, paste on appropriate chromosome information as the first field, rearrange columns to convert the output to a BED-like format with the core footprint's bases in columns 2 and 3, and then sort to obtain the final result.
 
 [footprinting description]: http://www.nature.com/nature/journal/v489/n7414/extref/nature11212-s1.pdf
 [sorted BED order]: https://bedops.readthedocs.org/en/latest/content/reference/file-management/sorting/sort-bed.html

@@ -81,12 +81,12 @@ namespace {
   //=========
   std::string usage() {
     std::string msg =  "Usage: \n";
-                msg += "\t[--flankmin <value> = 6]\n";
-                msg += "\t[--flankmax <value> = 12]\n";
-                msg += "\t[--centermin <value> = 6]\n";
-                msg += "\t[--centermax <value> = 100]\n";
-                msg += "\t[--maxthold <value> = 1]\n";
-                msg += "\tFile-Full-O-Numbers\n";
+                msg += "\t[--flankmin <bases>  = 6]\n";
+                msg += "\t[--flankmax <bases>  = 12]\n";
+                msg += "\t[--centermin <bases> = 6]\n";
+                msg += "\t[--centermax <bases> = 100]\n";
+                msg += "\t[--maxthold <value>  = 10]\n";
+                msg += "\tFile-Full-O-Integers\n";
     return(msg);
   }
 
@@ -102,7 +102,7 @@ namespace {
       vals_.insert(std::make_pair("--flankmax", 12));
       vals_.insert(std::make_pair("--centermin", 6));
       vals_.insert(std::make_pair("--centermax", 100));
-      vals_.insert(std::make_pair("--maxthold", 1));
+      vals_.insert(std::make_pair("--maxthold", 10));
 
       for ( int i = 1; i < argc - 1; i+=2 ) {
         if ( vals_.find(argv[i]) == vals_.end() ) {

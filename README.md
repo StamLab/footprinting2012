@@ -30,7 +30,7 @@ detect-cache
 The footprint occupancy score (FOS) of a candidate footprint is defined as:
 FOS = (C+1)/L + (C+1)/R, where C is the average number of tags over the central/core region of a potential footprint, while L (R) is the average tag level found in the left (right) flanking region.
 
---flankmin/--flankmax set the min/max number of flanking bases over which to find the maximum mean value for L or R.
+--flankmin/--flankmax set the min/max number of flanking bases over which to find the max mean value for L or R.
 
 --centermin/--centermax set the min/max number of bases over which to find the minimum mean value for C.
 
@@ -53,11 +53,11 @@ The output of this program consists of unthresholded candidate footprints.  The 
 3. The start of the right-flanking region (1 bp beyond the end of the core region)
 4. The end of the right-flanking region (1 bp beyond the end of the right-flanking region)
 5. The FOS
-6. The mean of the left-flanking region (L)
-7. The mean of the core region (C)
-8. The mean of the right-flanking region (R)
+6. The mean tag level of the left-flanking region (L)
+7. The mean tag level of the core region (C)
+8. The mean tag level of the right-flanking region (R)
 
-All candidate footprints are disjoint and they do not abutt.  Each has been optimized over the input parameter settings before further thresholding and the removal of footprints with unmapped bases in the core region.
+All candidate footprints are disjoint and they do not abutt.  Each has been optimized over the input parameter settings.  You will now need to threshold results further, including the removal of a candidate footprint with too many unmapped bases in its core region.
 
 Note that the program does not know about chromosomes.  Further, it reads in and interprets the first integer as belonging to absolute position 0.  So, if you feed it something that does not start at base 0, you need to adjust the output using the input base offset.
 

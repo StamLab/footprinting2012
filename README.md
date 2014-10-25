@@ -60,9 +60,9 @@ The output of this program consists of unthresholded candidate footprints.  The 
 7. The mean tag level of the core region (C)
 8. The mean tag level of the right-flanking region (R)
 
-All candidate footprints are disjoint and they do not abutt.  Each has been optimized over the input parameter settings.  You will now need to threshold results further, including the removal of a candidate footprint with too many unmapped bases in its core region.
+All candidate footprints are disjoint and they do not abutt.  Each has been optimized over the input parameter settings.  You will now need to threshold results further, including the removal of candidate footprints with too many unmapped bases in their core regions.
 
-Note that the program does not know about chromosomes.  Further, it reads in and interprets the first integer as belonging to absolute position 0.  So, if you feed it something that does not start at base 0, you need to adjust the output using the input base offset.
+Note that the program does not know about chromosomes.  Further, it reads in and interprets the first integer as belonging to absolute position 0.  So, if you feed it something that does not start at base 0, you need to adjust the output using the first input base's offset.
 
 Even if you paste on chromosome information to the beginning of the output, be careful as the output is not in [sorted BED order].
 

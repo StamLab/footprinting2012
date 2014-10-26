@@ -28,7 +28,7 @@ detect-cache
 ```
 
 The footprint occupancy score (FOS) of a candidate footprint is defined as:  
-FOS = (C+1)/L + (C+1)/R,  
+```FOS = (C+1)/L + (C+1)/R,```
 where C is the average number of tags over the central/core region of a potential footprint, while L (R) is the average tag level found in the left (right) flanking region.
 
 --flankmin  

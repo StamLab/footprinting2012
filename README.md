@@ -86,7 +86,7 @@ One method of sticking zeroes in for bases that have no per-base number of cuts 
     | cut -f5
 ```
 
-Note that ```<bases-with-tag-counts>``` must be a [properly sorted] BED file, and the output of this command sequence can be piped directly into the _detect-cache_ program as it includes both the bases with zero tags as well as the original results (found in ```<bases-with-tag-counts>```) in proper order.  Here, all bases beyond the last found in ```<bases-with-tag-counts>``` will have no integer representation.  This will not affect results.  However, if it does concern you, you can add another file to the ```bedops -c``` call to put zeroes all of the way to the end of each chromosome.  You can ask a question on [our forum] for help with that.
+Note that ```<bases-with-tag-counts>``` must be a [properly sorted] BED file, and the output of this command sequence is complete and it can be piped directly into the _detect-cache_ program.  Here, all bases beyond the last found in ```<bases-with-tag-counts>``` will have no integer representation.  This will not affect results.  However, you can add another file to the ```bedops -c``` call to put zeroes all of the way to the end of a chromosome.  Ask a question on [our forum] if needed.
 
 
 Performance and scalability

@@ -86,7 +86,7 @@ One method of sticking zeroes in for bases that have no per-base number of cuts 
     | cut -f5
 ```
 
-Note that <bases-with-tag-counts> must be [properly sorted], and the output of this command sequence can be piped directly into the _detect-cache_ program.
+Note that ```<bases-with-tag-counts>``` must be [properly sorted], and the output of this command sequence can be piped directly into the _detect-cache_ program.
 
 
 Performance and scalability

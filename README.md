@@ -81,7 +81,7 @@ Tips
 One method of sticking zeroes in for bases that have no per-base number of cuts [using bedops] looks like:
 ```
   bedops -c -L <bases-with-tag-counts> \
-    | awk '{ for (i=$2; i<$3; ++i) { print $1,i,i+1,".",0; }' \
+    | awk '{ for (i=$2; i<$3; ++i) { print $1,i,i+1,".",0; } }' \
     | bedops -u - <bases-with-tag-counts> \
     | cut -f5
 ```

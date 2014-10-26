@@ -28,7 +28,7 @@ detect-cache
 ```
 
 The footprint occupancy score (FOS) of a candidate footprint is defined as:  
-FOS = (C+1)/L + (C+1)/R,  
+```FOS = (C+1)/L + (C+1)/R,```
 where C is the average number of tags over the central/core region of a potential footprint, while L (R) is the average tag level found in the left (right) flanking region.
 
 --flankmin  
@@ -42,14 +42,16 @@ where C is the average number of tags over the central/core region of a potentia
 
 Input
 =====
-This program accepts a file full of integers that represent the number of sequencing tags at each base over the region of interest, including zeroes where no tags are found at a particular base.
+This program accepts a file full of integers that represent the number of cleavage events assigned to each base.  That is, each base receives an integer that shows the number of uniquely-mapping sequencing tags with 5' ends mapping to that position.  For those bases with none, they receive a zero.  Since cleavage occurs in between two nucleotides, choose the 5'-most of these to represent each cleavage event.  It is not strictly necessary to use only uniquely-mapping tags though it is common in practice.
 
-Regions of interest can be broken up into subsequences by file.  Breaking up your data by chromosome is likely the most natural method before running things in parallel.
+You may use a dash (-) to denote that input comes from stdin.
+
+Regions of interest can be broken up into subsequences by file.  Breaking up your data by chromosome is the most natural partition when running things in parallel.
 
 
 Results
 =======
-The output of this program consists of unthresholded candidate footprints.  The file format has 8 columns.
+The output of this program consists of unthresholded candidate footprints.  The output is deterministic so if you run everything again with the same inputs, you will receive the same output.  The file format has 8 columns.
 
 1. The leftmost position of the left-flanking region
 2. The start of the central/core potential footprint (1 bp beyond the end of left-flanking region)
@@ -60,13 +62,42 @@ The output of this program consists of unthresholded candidate footprints.  The 
 7. The mean tag level of the core region (C)
 8. The mean tag level of the right-flanking region (R)
 
-All candidate footprints' core regions are disjoint and they do not abutt.  Each has been optimized over the input parameter settings.  You will now need to threshold results further, including the removal of candidate footprints with too many unmapped bases in their core regions.
+All candidate footprints' core regions are disjoint and they do not abutt.  Each output region has been optimized over the input parameter settings.  You will next want to threshold results further, including the removal of candidate footprints with too many unmapped bases in their core regions.  Another common filter is to ignore results outside of DNaseI FDR 1% hotspot regions.
 
-Note that the program does not know about chromosomes.  Further, it reads in and interprets the first integer as belonging to absolute position 0.  If you feed it something that does not start at base 0, you need to adjust the output using the first input base's offset.
+Note that the program does not know about chromosomes.  Further, it reads in and interprets the first integer as belonging to absolute position zero.  If you feed it something that does not start at base zero, you need to adjust the output using the first input base's offset.
 
 Even if you paste on chromosome information to the beginning of the output, be careful as the output is not in [sorted BED order].
 
-Typically, one would threshold the potential footprints based upon some metric that utilizes the FOS, rearrange columns 2&3 to 1&2, paste on appropriate chromosome information as the first field, and then sort to obtain the final result.  Using this procedure, you end up with 0-based [start,end) footprint calls where columns 2 and 3 hold the core footprint start and end positions.
+Typically, one thresholds the potential footprints based upon some metric that utilizes the FOS, rearranges columns 2&3 to 1&2, pastes on appropriate chromosome information as the first field, and then sorts to obtain the final result.  Using this procedure, you end up with 0-based [start,end) footprint calls where columns 2 and 3 hold the core footprint start and end positions.
+
+
+Portability
+===========
+This program runs fine on Linux systems, Mac OS X, and BSD systems.  It is written in standard C++, so it should compile and run on Windows systems though a different build manager would need to replace our simple makefile.  The makefile hardcodes g++ as the compiler.  Change CC in the makfile (for example, to clang++) along with build flags as you see fit.
+
+
+Tips
+====
+One method of sticking zeroes in for bases that have no per-base number of cuts [using bedops] looks like:
+```
+  bedops -c -L <bases-with-tag-counts> \
+    | awk '{ for (i=$2; i<$3; ++i) { print $1,i,i+1,".",0; } }' \
+    | bedops -u - <bases-with-tag-counts> \
+    | cut -f5
+```
+
+Note that ```<bases-with-tag-counts>``` must be a [properly sorted] BED file, and the output of this command sequence is complete and it can be piped directly into the _detect-cache_ program.  Here, all bases beyond the last found in ```<bases-with-tag-counts>``` will have no integer representation.  This will not affect results.  However, you can add another file to the ```bedops -c``` call to put zeroes all of the way to the end of a chromosome.  Ask a question on [our forum] if needed.
+
+
+Performance and scalability
+===========================
+We regularly run this program on deeply-sequenced data using a compute cluster.  We break the genome up by chromosome and submit each to the cluster.  When using this method, you can expect full results in less than one hour with a genome roughly the size of the human genome.  One could restrict inputs to less than a whole genome (for example, restrict to 1% FDR DNaseI hotspots) in order to speed up computations considerably.  The tradeoff is a significantly larger amount of bookkeeping to create inputs and to glue the final results together properly.  In other words, this seems deceptively simple to do, and it's easy to overlook some pitfalls.
+
+The program can use a bit of main memory and we recommend 2G or more RAM.  Surprisingly, feeding the program all zeroes gives the worst case memory performance (and it will likely use up all of your main memory).  That is something that I plan to address in the future.  Consequently, for now, having sequencing tags spread over more bases in the genome improves memory performance.  Note that we have never had any memory issues in practice when using real data sets with 30 million or more uniquely-mapping sequencing tags.
+
 
 [footprinting description]: http://www.nature.com/nature/journal/v489/n7414/extref/nature11212-s1.pdf
 [sorted BED order]: https://bedops.readthedocs.org/en/latest/content/reference/file-management/sorting/sort-bed.html
+[properly sorted]: https://bedops.readthedocs.org/en/latest/content/reference/file-management/sorting/sort-bed.html
+[using bedops]: https://bedops.readthedocs.org/en/latest/content/reference/set-operations/bedops.html
+[our forum]: http://bedops.uwencode.org/forum/

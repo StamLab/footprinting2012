@@ -44,7 +44,7 @@ Input
 =====
 This program accepts a file full of integers that represent the number of cleavage events assigned to each base.  That is, each base receives an integer that shows the number of uniquely-mapping sequencing tags with 5' ends mapping to that position.  For those bases with none, they receive a zero.  Since cleavage occurs in between two nucleotides, choose the 5'-most of these to represent each cleavage event.  It is not strictly necessary to use only uniquely-mapping tags though it is common in practice.
 
-You may use a dash ('-') to denote that input comes from stdin.
+You may use a dash (-) to denote that input comes from stdin.
 
 Regions of interest can be broken up into subsequences by file.  Breaking up your data by chromosome is the most natural partition when running things in parallel.
 
@@ -86,17 +86,18 @@ One method of sticking zeroes in for bases that have no per-base number of cuts 
     | cut -f5
 ```
 
-Note that ```<bases-with-tag-counts>``` must be [properly sorted], and the output of this command sequence can be piped directly into the _detect-cache_ program.
+Note that ```<bases-with-tag-counts>``` must be [properly sorted], and the output of this command sequence can be piped directly into the _detect-cache_ program as it includes both the bases with zero tags as well as the original results (found in ```<bases-with-tag-counts>```) in proper order.  Here, all bases beyond the last found in ```<bases-with-tag-counts>``` will have no integer representation.  This will not affect results.  However, if it does concern you, you can add another file to the ```bedops -c``` call to put zeroes all of the way to the end of each chromosome.  You can ask a question on [our forum] for help with that.
 
 
 Performance and scalability
 ===========================
 We regularly run this program on deeply-sequenced data using a compute cluster.  We break the genome up by chromosome and submit each to the cluster.  When using this method, you can expect full results in less than one hour with a genome roughly the size of the human genome.  One could restrict inputs to less than a whole genome (for example, restrict to 1% FDR DNaseI hotspots) in order to speed up computations considerably.  The tradeoff is a significantly larger amount of bookkeeping to create inputs and to glue the final results together.
 
-The program can use a bit of main memory and we recommend 2G or more RAM.  Surprisingly, feeding the program all zeroes gives the worst case memory performance (and it will likely use up all of your main memory).  That is something that I plan to address in the future.  Consequently, for now, having sequencing tags over more bases in the genome improves memory performance.  Note that we have never had any memory issues in practice when using real data sets with 30 million or more uniquely-mapping sequencing tags.
+The program can use a bit of main memory and we recommend 2G or more RAM.  Surprisingly, feeding the program all zeroes gives the worst case memory performance (and it will likely use up all of your main memory).  That is something that I plan to address in the future.  Consequently, for now, having sequencing tags spread over more bases in the genome improves memory performance.  Note that we have never had any memory issues in practice when using real data sets with 30 million or more uniquely-mapping sequencing tags.
 
 
 [footprinting description]: http://www.nature.com/nature/journal/v489/n7414/extref/nature11212-s1.pdf
 [sorted BED order]: https://bedops.readthedocs.org/en/latest/content/reference/file-management/sorting/sort-bed.html
 [properly sorted]: https://bedops.readthedocs.org/en/latest/content/reference/file-management/sorting/sort-bed.html
 [using bedops]: https://bedops.readthedocs.org/en/latest/content/reference/set-operations/bedops.html
+[our forum]: http://bedops.uwencode.org/forum/

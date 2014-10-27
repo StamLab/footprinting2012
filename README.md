@@ -37,7 +37,7 @@ where C is the average number of tags over the central/core region of a potentia
 --centermin  
 --centermax set the min/max number of bases over which to find the min mean value for C  
 
---maxthold should be ignored so that the program uses the default value of 10  
+--maxthold should be ignored so that the program uses the default value of 10; it is not the maximum FOS value
 
 
 Input
@@ -73,7 +73,7 @@ Typically, one thresholds the potential footprints based upon some metric that u
 
 Portability
 ===========
-This program runs fine on Linux systems, Mac OS X, and BSD systems.  It is written in standard C++, so it should compile and run on Windows systems though a different build manager would need to replace our simple makefile.  The makefile hardcodes g++ as the compiler.  Change CC in the makfile (for example, to clang++) along with build flags as you see fit.
+This program runs fine on Linux systems, Mac OS X, and BSD systems.  It is written in standard C++, so it should compile and run natively on Windows systems though a different build manager would need to replace our simple makefile.  The makefile hardcodes g++ as the compiler.  Change CC in the makfile (for example, to clang++) along with build flags as you see fit.
 
 
 Tips

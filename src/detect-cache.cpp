@@ -2,7 +2,6 @@
    date:    2008
 */
 
-// Files included
 #include <algorithm>
 #include <cstddef>
 #include <deque>

@@ -1,5 +1,5 @@
 ## Footprint Detection ##
-> Shane Neph
+> by Shane Neph
 
 
 Overview
@@ -29,7 +29,7 @@ detect-cache
 
 The footprint occupancy score (FOS) of a candidate footprint is defined as:  
 ```FOS = (C+1)/L + (C+1)/R,```
-where C is the average number of tags over the central/core region of a potential footprint, while L (R) is the average tag level found in the left (right) flanking region.
+where C is the average number of tags over the central/core region of a potential footprint, while L (R) is the average tag level found in the left (right) flanking region.  A lower FOS is a more significant score.  Any case where L or R is less than or equal to C is ignored, and, consequently, no division by zero can occur.
 
 --flankmin  
 --flankmax set the min/max number of flanking bases over which to find the max mean value for L or R  
@@ -86,14 +86,14 @@ One method of sticking zeroes in for bases that have no per-base number of cuts 
     | cut -f5
 ```
 
-Note that ```<bases-with-tag-counts>``` must be a [properly sorted] BED file, and the output of this command sequence can be piped directly into the _detect-cache_ program.  Here, all bases beyond the last found in ```<bases-with-tag-counts>``` will have no integer representation.  This could affect results in only the slightest way (the very last footprint call if several unlikely conditions are all met).  You can add another file to the _bedops -c_ call to put zeroes all of the way to the end of a chromosome for completeness if that is a concern.  Ask a question on [our forum] if needed.
+Note that ```<bases-with-tag-counts>``` must be a [properly sorted] BED file, and the output of this command sequence can be piped directly into the _detect-cache_ program.  Here, all bases beyond the last found in ```<bases-with-tag-counts>``` will have no integer representation.  This could affect results in only the slightest way (the very last footprint call if several conditions are all met).  You can add another file to the _bedops -c_ call to put zeroes all of the way to the end of a chromosome for completeness if that is a concern.  Ask a question on [our forum] if needed.
 
 
 Performance and scalability
 ===========================
-We regularly run this program on deeply-sequenced data using a compute cluster.  We break the genome up by chromosome and submit each to a cluster of modest machines.  When using this method, you can expect full results in less than one hour with a genome roughly the size of that for human.  One could implement tricks to restrict inputs to less than a whole chromosome (for example, restrict to 1% FDR DNaseI hotspots) in order to speed up computations considerably.  The tradeoff is a significantly larger amount of bookkeeping to create inputs and to glue the final results together properly.  This seems deceptively simple to do, and it's easy to overlook pitfalls.  We recommend running _detect-cache_ with data from an entire chromosome.
+We regularly run this program on deeply-sequenced data using a compute cluster.  We break the genome up by chromosome and submit each to a cluster of modest machines.  We typically set flanking search parameters to 3-10 and the center/core footprint search sizes at 6-40.  With this method, you can expect full results in less than one hour with a genome roughly the size of that for human.  One can implement tricks to restrict inputs to less than a whole chromosome (for example, restrict to 1% FDR DNaseI hotspots) in order to speed up computations considerably.  The tradeoff is a significantly larger amount of bookkeeping to create inputs and to glue the final results together properly.  This seems deceptively simple to do, and it's easy to overlook pitfalls.  We recommend running _detect-cache_ with data from an entire chromosome.
 
-The program can use a bit of main memory and we recommend 2G or more RAM.  Surprisingly, feeding the program all zeroes gives the worst case memory performance (and it will likely use up all of your main memory).  That is something that I plan to address in the future.  Note that we have never had any memory issues in practice when using real data sets with 30 million or more uniquely-mapping sequencing tags.
+The program can use a bit of main memory and we recommend 2G or more RAM.  Surprisingly, feeding the program all zeroes gives the worst case memory performance.  That is something that I plan to address in the future.  Note that we have never had any memory issues in practice when using real data sets with 30 million or more uniquely-mapping sequencing tags.
 
 
 [footprinting description]: http://www.nature.com/nature/journal/v489/n7414/extref/nature11212-s1.pdf

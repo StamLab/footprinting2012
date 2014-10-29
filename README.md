@@ -73,7 +73,7 @@ Typically, one thresholds the potential footprints based upon some metric that u
 
 Portability
 ===========
-This program runs fine on Linux systems, Mac OS X, and BSD systems.  It is written in standard C++, so it should compile and run natively on Windows systems though a different build manager would need to replace our simple makefile.  The makefile hardcodes g++ as the compiler.  Change CC in the makfile (for example, to clang++) along with build flags as you see fit.
+This program runs fine on Linux systems, Mac OS X, and BSD systems.  It is written in standard C++, so it should compile and run natively on Windows systems though a different build manager would need to replace our simple makefile.  The makefile hardcodes g++ as the compiler.  Change CC in the makefile (for example, to clang++) along with build flags as you see fit.
 
 
 Tips

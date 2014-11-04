@@ -18,7 +18,7 @@ make -C src/
 Program Options:
 ================
 ```
-detect-cache
+fp2012
 	[--flankmin <bases>  = 6]
 	[--flankmax <bases>  = 12]
 	[--centermin <bases> = 6]
@@ -46,7 +46,7 @@ This program accepts a file full of integers that represent the number of cleava
 
 You may use a dash (-) to denote that input comes from stdin.
 
-Regions of interest can be broken up into subsequences by file.  We recommend that you partition your data by chromosome and run the _detect-cache_ program on each of these in parallel.  Note that the [bedextract] and [unstarch] programs are designed to stream data by chromosome very efficiently.  Use the applicable tool to stream the data, and then select the column of interest using the built-in _cut_ command.
+Regions of interest can be broken up into subsequences by file.  We recommend that you partition your data by chromosome and run the _fp2012_ program on each of these in parallel.  Note that the [bedextract] and [unstarch] programs are designed to stream data by chromosome very efficiently.  Use the applicable tool to stream the data, and then select the column of interest using the built-in _cut_ command.
 
 
 Results
@@ -86,12 +86,12 @@ One method of sticking zeroes in for bases that have no per-base number of cuts 
     | cut -f5
 ```
 
-Note that ```<bases-with-tag-counts>``` must be a [properly sorted] BED file, and the output of this command sequence can be piped directly into the _detect-cache_ program.  Here, all bases beyond the last found in ```<bases-with-tag-counts>``` will have no integer representation.  This could affect results in only the slightest way (the very last footprint call if several conditions are all met).  You can add another file to the _bedops -c_ call to put zeroes all of the way to the end of a chromosome for completeness if that is a concern.  Ask a question on [our forum] if needed.
+Note that ```<bases-with-tag-counts>``` must be a [properly sorted] BED file, and the output of this command sequence can be piped directly into the _fp2012_ program.  Here, all bases beyond the last found in ```<bases-with-tag-counts>``` will have no integer representation.  This could affect results in only the slightest way (the very last footprint call if several conditions are all met).  You can add another file to the _bedops -c_ call to put zeroes all of the way to the end of a chromosome for completeness if that is a concern.  Ask a question on [our forum] if needed.
 
 
 Performance and scalability
 ===========================
-We regularly run this program on deeply-sequenced data using a compute cluster.  We break the genome up by chromosome and submit each to a cluster of modest machines.  We typically set flanking search parameters to 3-10 and the center/core footprint search sizes at 6-40.  With this method, you can expect full results in less than one hour with a genome roughly the size of that for human.  One can implement tricks to restrict inputs to less than a whole chromosome (for example, restrict to 1% FDR DNaseI hotspots) in order to speed up computations considerably.  The tradeoff is a significantly larger amount of bookkeeping to create inputs and to glue the final results together properly.  This seems deceptively simple to do, and it's easy to overlook pitfalls.  We recommend running _detect-cache_ with data from an entire chromosome.
+We regularly run this program on deeply-sequenced data using a compute cluster.  We break the genome up by chromosome and submit each to a cluster of modest machines.  We typically set flanking search parameters to 3-10 and the center/core footprint search sizes at 6-40.  With this method, you can expect full results in less than one hour with a genome roughly the size of that for human.  One can implement tricks to restrict inputs to less than a whole chromosome (for example, restrict to 1% FDR DNaseI hotspots) in order to speed up computations considerably.  The tradeoff is a significantly larger amount of bookkeeping to create inputs and to glue the final results together properly.  This seems deceptively simple to do, and it's easy to overlook pitfalls.  We recommend running _fp2012_ with data from an entire chromosome.
 
 The program can use a bit of main memory and we recommend 2G or more RAM.  Surprisingly, feeding the program all zeroes gives the worst case memory performance.  That is something that I plan to address in the future.  Note that we have never had any memory issues in practice when using real data sets with 30 million or more uniquely-mapping sequencing tags.
 

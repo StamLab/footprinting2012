@@ -97,7 +97,7 @@ The program can use a bit of main memory and we recommend 2G or more RAM.  Surpr
 
 
 [footprinting description]: http://www.nature.com/nature/journal/v489/n7414/extref/nature11212-s1.pdf
-[sorted BED order]: https://bedops.readthedocs.org/en/latest/content/reference/file-management/sorting/sort-bed.htm
+[sorted BED order]: https://bedops.readthedocs.org/en/latest/content/reference/file-management/sorting/sort-bed.html
 [sorts]: https://bedops.readthedocs.org/en/latest/content/reference/file-management/sorting/sort-bed.html
 [properly sorted]: https://bedops.readthedocs.org/en/latest/content/reference/file-management/sorting/sort-bed.html
 [using bedops]: https://bedops.readthedocs.org/en/latest/content/reference/set-operations/bedops.html

@@ -12,7 +12,8 @@ Given a set of sequencing tag counts (integers) at each base of any region, this
 Build
 =====
 // requires g++ version 4.7 or newer  
-make -C src/
+make -C src/  
+This will create subdirectory bin/ and place _fp2012_ in it.
 
 
 Program Options:

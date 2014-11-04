@@ -20,6 +20,7 @@ Program Options:
 ================
 ```
 fp2012
+    [--help]
 	[--flankmin <bases>  = 6]
 	[--flankmax <bases>  = 12]
 	[--centermin <bases> = 6]

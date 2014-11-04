@@ -80,6 +80,7 @@ namespace {
   //=========
   std::string usage() {
     std::string msg =  "Usage: \n";
+                msg += "\t[--help]\n";
                 msg += "\t[--flankmin <bases>  = 6]\n";
                 msg += "\t[--flankmax <bases>  = 12]\n";
                 msg += "\t[--centermin <bases> = 6]\n";

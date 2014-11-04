@@ -15,7 +15,6 @@ Build
 make -C src/  
 This will create subdirectory bin/ and place _fp2012_ in it.
 
-
 Program Options:
 ================
 ```

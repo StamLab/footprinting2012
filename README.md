@@ -95,7 +95,7 @@ Performance and scalability
 ===========================
 We regularly run this program on deeply-sequenced data using a compute cluster.  We break the genome up by chromosome and submit each to a cluster of modest machines.  We typically set flanking search parameters to 3-10 and the center/core footprint search sizes at 6-40.  With this method, you can expect full results in less than one hour with a genome roughly the size of that for human.  One can implement tricks to restrict inputs to less than a whole chromosome (for example, restrict to 1% FDR DNaseI hotspots) in order to speed up computations considerably.  The tradeoff is a significantly larger amount of bookkeeping to create inputs and to glue the final results together properly.  This seems deceptively simple to do, and it's easy to overlook pitfalls.  We recommend running _fp2012_ with data from an entire chromosome.
 
-The program can use a bit of main memory and we recommend 2G or more RAM.  Surprisingly, feeding the program all zeroes gives the worst case memory performance.  That is something that we plan to address in the future.  Note that we have never had any memory issues in practice when using real data sets with 30 million or more uniquely-mapping sequencing tags.
+The program can use a bit of main memory and we recommend 2G or more RAM.  Surprisingly, feeding the program all zeroes gives the worst case memory performance.  That is something that we plan to address in the future.  Note that we have never had any memory issues in practice when using real data sets.
 
 
 [footprinting description]: http://www.nature.com/nature/journal/v489/n7414/extref/nature11212-s1.pdf

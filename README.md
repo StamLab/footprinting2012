@@ -53,7 +53,7 @@ Regions of interest can be broken up into subsequences by file.  We recommend th
 
 Results
 =======
-The output of this program consists of unthresholded candidate footprints.  The output is deterministic so if you run everything again with the same inputs, you will receive the same output.  The file format has 8 columns.
+The output of this program consists of unthresholded candidate footprints.  The output is deterministic so if you run everything again with the same inputs, you will receive the same results.  The file format has 8 columns.
 
 1. The leftmost position of the left-flanking region
 2. The start of the central/core potential footprint (1 bp beyond the end of left-flanking region)

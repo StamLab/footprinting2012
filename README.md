@@ -31,7 +31,7 @@ fp2012
 
 The footprint occupancy score (FOS) of a candidate footprint is defined as:  
 ```FOS = (C+1)/L + (C+1)/R,```
-where C is the average number of tags over the central/core region of a potential footprint, and L (R) is the average tag level found in the left (right) flanking region.  A lower FOS is a more significant score.  Any case where L or R is less than or equal to C is ignored, and, consequently, no division by zero can occur.
+where C is the average number of tags over the central/core region of a potential footprint, and L (R) is the average tag level found in the left (right) flanking region.  A lower FOS is a more significant score.  Any case where L or R is less than or equal to C is ignored, and, consequently, no division by zero can occur.  Lower FOS values are more significant values.
 
 --flankmin  
 --flankmax set the min/max number of flanking bases over which to find the max mean value for L and R  
@@ -59,7 +59,7 @@ The output of this program consists of unthresholded candidate footprints.  The 
 2. The start of the central/core potential footprint (1 bp beyond the end of left-flanking region)
 3. The start of the right-flanking region (1 bp beyond the end of the core region)
 4. The end of the right-flanking region (1 bp beyond the end of the right-flanking region)
-5. The FOS
+5. The FOS (lower is more significant)
 6. The mean tag level of the left-flanking region (L)
 7. The mean tag level of the core region (C)
 8. The mean tag level of the right-flanking region (R)
@@ -70,7 +70,7 @@ Note that the program does not know about chromosomes.  Further, it reads in and
 
 Even if you paste on chromosome information to the beginning of the output, be careful as the output is not in [sorted BED order].
 
-Typically, one thresholds the potential footprints based upon some metric that utilizes the FOS, rearranges columns 2&3 to 1&2, pastes on appropriate chromosome information as the first field, and then [sorts] to obtain the final result.  Using this procedure, you end up with 0-based [start,end) footprint calls where columns 2 and 3 hold the core footprint start and end positions.
+Typically, one thresholds the potential footprints based upon some metric that utilizes the FOS, rearranges columns 2&3 to 1&2, pastes on appropriate chromosome information as the first field, and then [sorts] to obtain the final result.  Note that a lower FOS is a more significant FOS.  Using this procedure, you end up with 0-based [start,end) footprint calls where columns 2 and 3 hold the core footprint start and end positions.
 
 
 Portability

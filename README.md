@@ -80,9 +80,9 @@ This program runs fine on Linux systems, Mac OS X, and BSD systems.  It is writt
 
 Tips
 ====
-One method of sticking zeroes in for bases that have no per-base number of cuts [using bedops], where column 5 holds the base counts, looks like:
+One method of sticking zeroes in for bases on chr7 that have no per-base number of cuts [using bedops], where column 5 of the input holds the base counts, looks like:
 ```
-  bedops -c -L <bases-with-tag-counts> \
+  bedops -c -L --chrom chr7 <bases-with-tag-counts> \
     | awk '{ for (i=$2; i<$3; ++i) { print $1,i,i+1,".",0; } }' \
     | bedops -u - <bases-with-tag-counts> \
     | cut -f5

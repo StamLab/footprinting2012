@@ -31,7 +31,7 @@ fp2012
 
 The footprint occupancy score (FOS) of a candidate footprint is defined as:  
 ```FOS = (C+1)/L + (C+1)/R,```
-where C is the average number of tags over the central/core region of a potential footprint, and L (R) is the average tag level found in the left (right) flanking region.  A lower FOS is a more significant score.  Any case where L or R is less than or equal to C is ignored, and, consequently, no division by zero can occur.
+where C is the average number of tags over the central/core region of a potential footprint, and L (R) is the average tag level found in the left (right) flanking region.  A lower FOS is a more significant score.  Any case is ignored where L or R is less than or equal to C, and, consequently, no division by zero can occur.
 
 --flankmin  
 --flankmax set the min/max number of flanking bases over which to find the max mean value for L and R  

@@ -25,7 +25,6 @@ fp2012
 	[--flankmax <bases>  = 12]
 	[--centermin <bases> = 6]
 	[--centermax <bases> = 100]
-	[--maxthold <value>  = 10]
 	File-Full-O-Integers
 ```
 
@@ -38,8 +37,6 @@ where C is the average number of tags over the central/core region of a potentia
 
 --centermin  
 --centermax set the min/max number of bases over which to find the min mean value for C  
-
---maxthold should be ignored so that the program uses the default value of 10
 
 
 Input

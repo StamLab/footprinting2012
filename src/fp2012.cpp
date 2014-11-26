@@ -85,7 +85,6 @@ namespace {
                 msg += "\t[--flankmax <bases>  = 12]\n";
                 msg += "\t[--centermin <bases> = 6]\n";
                 msg += "\t[--centermax <bases> = 100]\n";
-                msg += "\t[--maxthold <value>  = 10]\n";
                 msg += "\tFile-Full-O-Integers\n";
     return(msg);
   }

@@ -67,7 +67,7 @@ Note that the program does not know about chromosomes.  Further, it reads in and
 
 Even if you paste on chromosome information to the beginning of the output, be careful as the output is not in [sorted BED order].
 
-Typically, one thresholds the potential footprints based upon some metric that utilizes the FOS, rearranges columns 2&3 to 1&2, pastes on appropriate chromosome information as the first field, and then [sorts] to obtain the final result.  Note that a lower FOS is a more significant FOS.  Using this procedure, you end up with 0-based [start,end) footprint calls where columns 2 and 3 hold the core footprint start and end positions.
+Typically, one rearranges columns 2&3 to 1&2, pastes on appropriate chromosome information as the first field, and then [sorts] to obtain a BED-like file.  Then a thresholding procedure based upon FOS is applied to the potential footprints.  Note that a lower FOS is a more significant FOS.  Using this procedure, you end up with 0-based [start,end) footprint calls where columns 2 and 3 hold the core footprint start and end positions.
 
 
 Portability

@@ -72,7 +72,7 @@ Typically, one rearranges columns 2&3 to 1&2, pastes on appropriate chromosome i
 
 Portability
 ===========
-This program runs fine on Linux systems, Mac OS X, and BSD systems.  It is written in standard C++, so it should compile and run natively on Windows systems though a different build manager would need to replace the simple makefile.  The makefile hardcodes g++ as the compiler.  Change CC in the makefile (for example, to clang++) along with build flags as you see fit.
+This program runs fine on Linux systems, Mac OS X, and other BSD systems.  It is written in standard C++, so it should compile and run natively on Windows systems though a different build manager would need to replace the simple makefile.  The makefile hardcodes g++ as the compiler.  Change CC in the makefile (for example, to clang++) along with build flags as you see fit.
 
 
 Tips

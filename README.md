@@ -41,7 +41,7 @@ where C is the average number of tags over the central/core region of a potentia
 
 Input
 =====
-This program accepts a file full of integers that represent the number of cleavage events assigned to each base.  That is, each base receives an integer that shows the number of uniquely-mapping sequencing tags with 5' ends mapping to that position.  For those bases with none, they receive a zero.  Since cleavage occurs in between two nucleotides, choose the 5'-most of these to represent each cleavage event.  It is not strictly necessary to use only uniquely-mapping tags though it is common in practice.
+This program accepts a file full of integers that represent the number of cleavage events assigned to each base.  That is, each base receives an integer that shows the number of uniquely-mapping sequencing tags with 5' ends mapping to that position.  For those bases with none, they receive a zero.  Since cleavage occurs in between two nucleotides, choose the 5'-most of these (relative to the forward strand) to represent each cleavage event.  It is not strictly necessary to use only uniquely-mapping tags though it is common in practice.
 
 You may use a dash (-) to denote that input comes from stdin.
 
